@@ -1,0 +1,150 @@
+/*DEFAULT VIEW */
+
+/*logo animation starting at a width of 25px and increasing to 475px and opacity that increases from 0 to 1*/
+@keyframes animatelogo {
+    0% {opacity: 0; width: 25px}
+    100% {opacity: 1;width: 475px}
+}
+
+/*applying animation to logo for five seconds (only want this to occur when the page loads)*/
+#logo {
+    animation: animatelogo 5s;
+    animation-iteration-count: 1;
+}
+
+/*editing body element to use 'Poppins' with serif backup and concrete image as background with white as back up*/
+body {
+    font-family:'Poppins', serif;
+    background-image: url("/images/concrete_seamless.png");
+    background-color: #f1f1f1;
+}
+
+/*editing header tag using flex*/ 
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*editing navigation links using flex*/ 
+.navigation_links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/*stying links so that color doesn't change after it's visited (CHALLENGE TASK)*/
+a:visited {
+    color: blue;
+}
+
+/*applying styling to 'card'class*/
+.card {
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    display: flex;
+    width: 450px;
+    flex-direction: column;
+}
+
+/*applying styling to child elements of 'card' class*/
+.card > header {
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding-block: 20px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* STEPS 7 and 8 */
+
+/*styling images */
+.gallery img {
+    border: solid 10px #50c7c7;
+    width: 300px;
+    margin: 10px;
+}
+
+
+/*900px PLUS VIEW*/
+
+@media only screen and (min-width:900px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+/*change nav to row*/
+    .navigation_links {flex-direction: row;}
+
+    .card {
+        width: 275px;
+    }
+
+    .pricing {
+        flex-direction: row;
+    }
+
+/*style first <header> child*/
+    body > header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+    }
+
+}
+
+/*remove logo animation if user prefers reduced motion*/
+@media (prefers-reduced-motion: reduce) {
+    #logo {animation: none;}
+}
+
+/*PRINT VIEW*/
+
+@media print {
+/*set font family to 'Arial', was 'Poppins' earlier*/
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+/*set nav width to 100% so that items of links are spaced correctly and evenly*/
+    nav {width: 100%;}
+
+    .navigation_links {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .pricing {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .card {
+        border: 2px solid #45ADDD;
+        flex-basis: 325px;
+    }
+
+/*remove gallery items from display*/
+    .gallery, #gallery {display: none;}
+
+/*add thumbs up after the 2nd list element inside an element with 'card' class */
+    .card li:nth-child(2):after {
+        content: ' \1f44d';
+    }
+}
