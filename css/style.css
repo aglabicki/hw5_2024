@@ -1,14 +1,15 @@
 /*DEFAULT VIEW */
 
 /*logo animation starting at a width of 25px and increasing to 475px and opacity that increases from 0 to 1*/
-@keyframes animatelogo {
+@keyframes logo {
     0% {opacity: 0; width: 25px}
     100% {opacity: 1;width: 475px}
 }
 
 /*applying animation to logo for five seconds (only want this to occur when the page loads)*/
 #logo {
-    animation: animatelogo 5s;
+    width: 475px;
+    animation: logo 5s;
     animation-iteration-count: 1;
 }
 
@@ -19,7 +20,7 @@ body {
     background-color: #f1f1f1;
 }
 
-/*editing header tag using flex*/ 
+/*editing header tag using flex so that it is centered*/ 
 header {
     display: flex;
     flex-direction: column;
@@ -33,18 +34,18 @@ header {
     align-items: flex-start;
 }
 
-/*stying links so that color doesn't change after it's visited (CHALLENGE TASK)*/
+/*stying links so that color doesn't change after it's visited*/
 a:visited {
     color: blue;
 }
 
-/*applying styling to 'card'class*/
+/*applying styling to 'card' class*/
 .card {
-    border-top-right-radius: 50px;
-    border-top-left-radius: 50px;
     display: flex;
     width: 450px;
     flex-direction: column;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
 }
 
 /*applying styling to child elements of 'card' class*/
@@ -56,6 +57,7 @@ a:visited {
     border-top-left-radius: 50px;
 }
 
+/*centering cards*/
 .pricing {
     display: flex;
     flex-direction: column;
@@ -63,15 +65,14 @@ a:visited {
     justify-content: center;
 }
 
+/*centering gallery images and wrap*/
 .gallery {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-/* STEPS 7 and 8 */
-
-/*styling images */
+/*styling gallery images with border*/
 .gallery img {
     border: solid 10px #50c7c7;
     width: 300px;
@@ -82,23 +83,31 @@ a:visited {
 /*900px PLUS VIEW*/
 
 @media only screen and (min-width:900px) {
-
+/*logo to left, links to right*/
     header {
         flex-direction: row;
         justify-content: space-between;
     }
-/*change nav to row*/
-    .navigation_links {flex-direction: row;}
 
-    .card {
-        width: 275px;
-    }
-
-    .pricing {
+/*change navigation links to horizontal*/
+    .navigation_links {
+        display: flex;
         flex-direction: row;
     }
 
-/*style first <header> child*/
+/*making card size widths the same*/
+    .card {
+        flex-direction: column;
+        width: 275px;
+    }
+/*make cards horizontal*/
+    .pricing {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+/*style first <header> child so that navigation bar is visible even when scrolling*/
     body > header {
         position: sticky;
         top: 0;
@@ -109,7 +118,10 @@ a:visited {
 
 /*remove logo animation if user prefers reduced motion*/
 @media (prefers-reduced-motion: reduce) {
-    #logo {animation: none;}
+    #logo {
+        width: 475px;
+        animation: none;
+    }
 }
 
 /*PRINT VIEW*/
@@ -122,29 +134,41 @@ a:visited {
     }
 
 /*set nav width to 100% so that items of links are spaced correctly and evenly*/
-    nav {width: 100%;}
+    nav {
+        width: 100%;
+    }
 
+/*making navigation links centered and horizontal*/
     .navigation_links {
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
     }
 
+/*making cards horizontal and line up correctly*/
     .pricing {
         flex-direction: row;
         align-items: flex-end;
     }
 
+/*apply border and flex-basis to card elements*/
     .card {
         border: 2px solid #45ADDD;
         flex-basis: 325px;
     }
 
-/*remove gallery items from display*/
-    .gallery, #gallery {display: none;}
+/*remove gallery header*/
+    h2:last-of-type {
+        display: none;
+    }
 
-/*add thumbs up after the 2nd list element inside an element with 'card' class */
-    .card li:nth-child(2):after {
-        content: ' \1f44d';
+/*remove gallery*/
+    .gallery {
+        display: none;
+    }
+
+/*selecting second item in unorered list and adding a thumbs up after it*/
+    .card ul *:nth-child(2n)::after {
+        content: '👍';
     }
 }
